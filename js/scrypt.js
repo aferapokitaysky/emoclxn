@@ -831,4 +831,88 @@ document.addEventListener('DOMContentLoaded', () => {
     pressInCards.forEach(card => pressObserver.observe(card));
   }
 
+
+  // ==========================================
+  // 23. MAXIMUM GOOGLE ANALYTICS TELEMETRY
+  // ==========================================
+  function trackGaEvent(eventName, category, label, value = null) {
+    if (typeof gtag === 'function') {
+      const payload = {
+        'event_category': category,
+        'event_label': label
+      };
+      if (value !== null) {
+        payload['value'] = value;
+      }
+      gtag('event', eventName, payload);
+    }
+  }
+
+  // Track social card clicks
+  document.querySelectorAll('.contact-social-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const handle = this.querySelector('.social-card-handle')?.textContent || 'unknown';
+      const label = this.querySelector('.social-card-label')?.textContent || 'unknown';
+      trackGaEvent('click_social', 'Social Media', `${label} (${handle})`);
+    });
+  });
+
+  // Track "СОЗДАТЬ ТИКЕТ" Discord join button click
+  const discordTicketBtn = document.querySelector('a[href*="discord.gg"]');
+  if (discordTicketBtn) {
+    discordTicketBtn.addEventListener('click', function() {
+      trackGaEvent('click_join_ticket', 'Recruitment', 'Discord Create Ticket Clicked');
+    });
+  }
+
+  // Track Redux Download clicks
+  document.querySelectorAll('a[href*="drive.google.com"], a[href*="mega.nz"]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const url = this.getAttribute('href');
+      const text = this.textContent.trim();
+      trackGaEvent('download_redux', 'Redux Download', `${text} (${url})`);
+    });
+  });
+
+  // Track Theme Toggle changes
+  const themeToggleTelemetry = document.getElementById('themeToggle');
+  if (themeToggleTelemetry) {
+    themeToggleTelemetry.addEventListener('click', function() {
+      const newTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+      trackGaEvent('toggle_theme', 'Theme Customization', `Theme Switched to ${newTheme}`);
+    });
+  }
+
+  // Track Navigation clicks
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function() {
+      const target = this.getAttribute('href');
+      trackGaEvent('navigation_click', 'Navigation', `Jumped to Section ${target}`);
+    });
+  });
+
+  // Track mobile nav toggle
+  if (burgerBtn) {
+    burgerBtn.addEventListener('click', function() {
+      const state = mobileNav.classList.contains('active') ? 'opened' : 'closed';
+      trackGaEvent('mobile_nav_toggle', 'Navigation', `Mobile Menu ${state}`);
+    });
+  }
+
+  // Track scroll milestones (25%, 50%, 75%, 100%)
+  let trackedMilestones = { '25': false, '50': false, '75': false, '100': false };
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    
+    Object.keys(trackedMilestones).forEach(milestone => {
+      const limit = parseInt(milestone);
+      if (scrollPercent >= limit && !trackedMilestones[milestone]) {
+        trackedMilestones[milestone] = true;
+        trackGaEvent('scroll_depth', 'User Engagement', `Scrolled to ${milestone}%`);
+      }
+    });
+  }, { passive: true });
+
 });

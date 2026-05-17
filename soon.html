@@ -10,13 +10,26 @@
             document.documentElement.classList.add('embedded');
         }
     </script>
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFDJP17EB4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-DFDJP17EB4', {
+            'cookie_domain': 'auto',
+            'cookie_flags': 'SameSite=None;Secure',
+            'allow_google_signals': true,
+            'allow_ad_personalization_signals': true
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMO CLXN — GTA 5 RP | Majestic RP, RageMP & Alt:V Domination</title>
     <meta name="description" content="Официальный сайт капт фамы EMO CLXN. Burton Domination, Majestic RP, RageMP и Alt:V капты. Раздел находится в стадии разработки.">
     <meta name="keywords" content="gta 5 rp, majestic rp, ragemp, alt:v, capt fam, капт фама, гетто majestic, стрельба majestic, rage mp capt, alt v gta 5, heavy pistol, shadowplay, emo clxn">
     <link rel="canonical" href="https://www.emoclxn.tech/soon.html">
-    <link rel="icon" href="./assets/image%20copy.png" type="image/png">
+    <link rel="icon" href="./assets/emo-clxn-logo.png" type="image/png">
     
     <!-- Google Fonts & Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Fira+Code:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&family=UnifrakturMaguntia&family=Orbitron:wght@500;700;900&family=Pirata+One&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -409,6 +422,33 @@
                 cursorCircle.style.width = '28px';
                 cursorCircle.style.height = '28px';
                 cursorCircle.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Google Analytics event tracking
+        function trackGaEvent(eventName, category, label) {
+            if (typeof gtag === 'function') {
+                gtag('event', eventName, {
+                    'event_category': category,
+                    'event_label': label
+                });
+            }
+        }
+
+        // Track "Вернуться назад" button
+        const backBtn = document.querySelector('.back-btn');
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                trackGaEvent('click_back_to_home', 'Navigation', 'Soon Page Go Back Clicked');
+            });
+        }
+
+        // Track logo hovers
+        document.querySelectorAll('.logo-wrapper').forEach(wrapper => {
+            wrapper.addEventListener('mouseenter', function() {
+                const img = this.querySelector('img');
+                const altText = img ? img.getAttribute('alt') : 'logo';
+                trackGaEvent('hover_logo_soon', 'Teaser Card Interactions', `Hovered ${altText}`);
             });
         });
 
