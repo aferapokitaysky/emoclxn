@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Fade out screen
       setTimeout(() => {
         bootloader.classList.add('hidden');
-        notify('добро пожаловать в emoclxn // ядро запущено', 'success', 4500);
+        notify('добро пожаловать в emoclxn', 'success', 4500);
         // Start counter checks
         initCountersObserver();
       }, 700);
