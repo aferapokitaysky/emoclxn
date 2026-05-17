@@ -1,18 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+    xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
+    <!-- ═══════════ Главная страница ═══════════ -->
     <url>
         <loc>https://www.emoclxn.tech/</loc>
         <lastmod>2026-05-17</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="ru-RU" href="https://www.emoclxn.tech/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.emoclxn.tech/"/>
+
+        <!-- Главное изображение страницы (Logo / OG image) -->
+        <image:image>
+            <image:loc>https://www.emoclxn.tech/assets/emo-clxn-logo.png</image:loc>
+            <image:title>EMO CLXN Logo — капт-фама GTA 5 RP</image:title>
+            <image:caption>Готический shield-логотип EMO CLXN — капт-фамы GTA 5 RP на Majestic, RageMP и Alt:V</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://www.emoclxn.tech/assets/image.png</image:loc>
+            <image:title>EMO CLXN Hero Shield</image:title>
+            <image:caption>Hero shield EMO CLXN на главной странице</image:caption>
+        </image:image>
+
+        <!-- Видеообъект для YouTube highlights -->
+        <video:video>
+            <video:thumbnail_loc>https://www.emoclxn.tech/assets/emo-clxn-logo.png</video:thumbnail_loc>
+            <video:title>EMO CLXN — Capt Highlights</video:title>
+            <video:description>Доминация капт-фамы EMO CLXN на серверах GTA 5 RP</video:description>
+            <video:content_loc>https://youtu.be/HP5_l6GB4WA</video:content_loc>
+            <video:player_loc>https://www.youtube.com/embed/HP5_l6GB4WA</video:player_loc>
+            <video:publication_date>2024-01-01T00:00:00+03:00</video:publication_date>
+            <video:family_friendly>yes</video:family_friendly>
+        </video:video>
     </url>
 
+    <!-- ═══════════ Sub-page (soon/announcement) ═══════════ -->
     <url>
         <loc>https://www.emoclxn.tech/soon.html</loc>
         <lastmod>2026-05-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.3</priority>
+    </url>
+
+    <!-- ═══════════ Anchor sections (deep-linkable areas) ═══════════ -->
+    <url>
+        <loc>https://www.emoclxn.tech/#stats</loc>
+        <lastmod>2026-05-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.emoclxn.tech/#sotka</loc>
+        <lastmod>2026-05-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.emoclxn.tech/#redux</loc>
+        <lastmod>2026-05-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.emoclxn.tech/#socials</loc>
+        <lastmod>2026-05-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.emoclxn.tech/#contact</loc>
+        <lastmod>2026-05-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
     </url>
 
 </urlset>

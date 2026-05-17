@@ -2,7 +2,11 @@
 <html lang="ru">
 <head>
     <script>
-        if (window.self !== window.top) {
+        try {
+            if (window.self !== window.top) {
+                document.documentElement.classList.add('embedded');
+            }
+        } catch (e) {
             document.documentElement.classList.add('embedded');
         }
     </script>
@@ -350,8 +354,15 @@
     <div class="custom-cursor-circle" id="cursorCircle"></div>
 
     <script>
-        // Check if running inside an iframe
-        if (window.self !== window.top) {
+        // Check if running inside an iframe safely
+        let isEmbeddedFrame = false;
+        try {
+            isEmbeddedFrame = (window.self !== window.top);
+        } catch (e) {
+            isEmbeddedFrame = true;
+        }
+
+        if (isEmbeddedFrame) {
             document.addEventListener('DOMContentLoaded', () => {
                 const backBtn = document.querySelector('.back-btn-container');
                 const curDot = document.getElementById('cursorDot');

@@ -1,0 +1,70 @@
+{
+  "name": "EMO CLXN — Капт-фама №1 в GTA 5 RP",
+  "short_name": "EMO CLXN",
+  "description": "Лучшая капт-фама в GTA 5 RP с 2023 года. Majestic RP, RageMP, Alt:V. 100% доминация на сотке Burton.",
+  "lang": "ru-RU",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0e1a",
+  "theme_color": "#0a0e1a",
+  "categories": ["games", "entertainment", "social"],
+  "icons": [
+    {
+      "src": "/assets/emo-clxn-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/emo-clxn-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/emo-clxn-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/emo-clxn-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Вступить в Discord",
+      "short_name": "Discord",
+      "description": "Открыть Discord-сервер EMO CLXN",
+      "url": "https://discord.gg/S3zFaA6sh"
+    },
+    {
+      "name": "YouTube канал",
+      "short_name": "YouTube",
+      "description": "Highlights и кб-видео фамы",
+      "url": "https://youtube.com/@emoclan"
+    },
+    {
+      "name": "EMO Spring Redux",
+      "short_name": "Redux",
+      "description": "Скачать шейдерпак",
+      "url": "/#redux"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/image.png",
+      "sizes": "1200x1200",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "EMO CLXN Hero"
+    }
+  ],
+  "prefer_related_applications": false
+}

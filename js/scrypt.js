@@ -553,6 +553,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const burgerBtn = document.getElementById('burgerBtn');
   const mobileNav = document.getElementById('mobileNav');
 
+  // Safety: ensure body overflow is never stuck on page load
+  document.body.style.overflow = '';
+
   if (burgerBtn && mobileNav) {
     burgerBtn.addEventListener('click', () => {
       burgerBtn.classList.toggle('active');
@@ -566,6 +569,24 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileNav.classList.remove('active');
         document.body.style.overflow = '';
       });
+    });
+
+    // Close mobile nav and restore scroll on resize (orientation change, etc)
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024 && mobileNav.classList.contains('active')) {
+        burgerBtn.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }, { passive: true });
+
+    // Safety: pressing Escape closes nav and restores scroll
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+        burgerBtn.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     });
   }
 

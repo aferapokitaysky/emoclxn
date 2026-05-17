@@ -1,16 +1,84 @@
-# ==========================================
+# ═══════════════════════════════════════════════════
 # EMO CLXN — TECHNICAL ROBOTS.TXT
-# Optimized for Google, Yandex and Bing
-# Custom Domain: www.emoclxn.tech
-# ==========================================
+# Domain: www.emoclxn.tech
+# Optimized for Google, Yandex, Bing, DuckDuckGo
+# ═══════════════════════════════════════════════════
 
+# All search engines welcome
 User-agent: *
 Allow: /
-Allow: /index.html
-Allow: /soon.html
-Allow: /css/
-Allow: /js/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /admin/
+
+# Google — main crawler
+User-agent: Googlebot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+Allow: /*.webm$
+Allow: /*.gif$
+Allow: /*.svg$
+
+# Google image bot
+User-agent: Googlebot-Image
 Allow: /assets/
 
-# Sitemaps
+# Google video bot
+User-agent: Googlebot-Video
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex — Russian search (primary audience)
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+Host: www.emoclxn.tech
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: YandexImages
+Allow: /assets/
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Mail.ru
+User-agent: Mail.RU_Bot
+Allow: /
+
+# Telegram preview bot
+User-agent: TelegramBot
+Allow: /
+
+# Discord preview bot
+User-agent: Discordbot
+Allow: /
+
+# Twitter / X card bot
+User-agent: Twitterbot
+Allow: /
+
+# Facebook external hit (OG previews)
+User-agent: facebookexternalhit
+Allow: /
+
+# Block aggressive AI scrapers (optional — uncomment if needed)
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+# User-agent: anthropic-ai
+# Disallow: /
+
+# Sitemap
 Sitemap: https://www.emoclxn.tech/sitemap.xml
