@@ -802,11 +802,13 @@ body.light-mode header {
 }
 
 .stat-number-wrapper {
+  position: relative;
+  display: inline-block;
   margin-bottom: 12px;
 }
 
 .stat-num {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 52px;
   font-weight: 800;
   background: var(--chrome-gradient);
@@ -817,11 +819,14 @@ body.light-mode header {
 }
 
 .stat-plus {
-  font-size: 32px;
-  color: var(--accent-blue);
-  vertical-align: super;
-  margin-left: 2px;
-  text-shadow: var(--glow-blue);
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.35);
+  display: inline-block;
+  vertical-align: baseline;
+  margin-left: 6px;
 }
 
 .stat-lbl {
@@ -2519,6 +2524,10 @@ footer.main-footer {
     font-size: 40px;
   }
 
+  .stat-plus {
+    font-size: 18px !important;
+  }
+
   .section-title {
     font-size: 26px;
     letter-spacing: 2px;
@@ -2577,6 +2586,10 @@ footer.main-footer {
 
   .stat-num {
     font-size: 34px;
+  }
+
+  .stat-plus {
+    font-size: 15px !important;
   }
 
   .domination-large-title {
