@@ -166,30 +166,36 @@ document.addEventListener('DOMContentLoaded', () => {
   function applyTheme(isDark) {
     if (isDark) {
       document.body.classList.remove('light-mode');
-      themeToggleBtn.textContent = '🌙';
-      themeToggleBtn.setAttribute('title', 'Активировать светлую схему');
+      if (themeToggleBtn) {
+        themeToggleBtn.textContent = '🌙';
+        themeToggleBtn.setAttribute('title', 'Активировать светлую схему');
+      }
     } else {
       document.body.classList.add('light-mode');
-      themeToggleBtn.textContent = '☀️';
-      themeToggleBtn.setAttribute('title', 'Активировать темную готику');
+      if (themeToggleBtn) {
+        themeToggleBtn.textContent = '☀️';
+        themeToggleBtn.setAttribute('title', 'Активировать темную готику');
+      }
     }
   }
 
-  themeToggleBtn.addEventListener('click', () => {
-    const isDarkNow = !document.body.classList.contains('light-mode');
-    const targetThemeDark = !isDarkNow;
-    
-    applyTheme(targetThemeDark);
-    localStorage.setItem('darkMode', targetThemeDark);
-    
-    updateSystemSynchronization('themeSwapped', 15);
-    
-    if (targetThemeDark) {
-      notify('Тёмный режим активирован. Хром отражает бездну.', 'info', 3000);
-    } else {
-      notify('Светлый режим активирован. Стерильный футуризм запущен.', 'info', 3000);
-    }
-  });
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const isDarkNow = !document.body.classList.contains('light-mode');
+      const targetThemeDark = !isDarkNow;
+      
+      applyTheme(targetThemeDark);
+      localStorage.setItem('darkMode', targetThemeDark);
+      
+      updateSystemSynchronization('themeSwapped', 15);
+      
+      if (targetThemeDark) {
+        notify('Тёмный режим активирован. Хром отражает бездну.', 'info', 3000);
+      } else {
+        notify('Светлый режим активирован. Стерильный футуризм запущен.', 'info', 3000);
+      }
+    });
+  }
 
 
   // ==========================================
