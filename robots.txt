@@ -1,0 +1,16 @@
+# ==========================================
+# EMO CLXN — TECHNICAL ROBOTS.TXT
+# Optimized for Google, Yandex and Bing
+# Custom Domain: www.emoclxn.tech
+# ==========================================
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /soon.html
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+
+# Sitemaps
+Sitemap: https://www.emoclxn.tech/sitemap.xml
