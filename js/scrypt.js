@@ -131,6 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // Fade out screen
       setTimeout(() => {
         bootloader.classList.add('hidden');
+        // Trigger hero entrance orchestration
+        document.body.classList.add('hero-play');
+        // Apply ambient glitch loop AFTER letter drop completes
+        setTimeout(() => {
+          const heroTitle = document.querySelector('.hero-title');
+          if (heroTitle) heroTitle.classList.add('hero-revealed');
+        }, 2400);
         notify('добро пожаловать в emoclxn', 'success', 4500);
         // Start counter checks
         initCountersObserver();
@@ -426,4 +433,381 @@ document.addEventListener('DOMContentLoaded', () => {
       }, '*');
     });
   }
+
+
+  // ==========================================
+  // 13. SCROLL REVEAL ANIMATIONS
+  // ==========================================
+  const revealElements = document.querySelectorAll('.reveal');
+  
+  if (revealElements.length > 0) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
+
+
+  // ==========================================
+  // 14. FLOATING PARTICLES BACKGROUND
+  // ==========================================
+  const particlesCanvas = document.getElementById('particlesCanvas');
+  if (particlesCanvas) {
+    const ctx = particlesCanvas.getContext('2d');
+    let particles = [];
+    const PARTICLE_COUNT = 60;
+
+    function resizeCanvas() {
+      particlesCanvas.width = window.innerWidth;
+      particlesCanvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * particlesCanvas.width;
+        this.y = Math.random() * particlesCanvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.pulse = Math.random() * Math.PI * 2;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.pulse += 0.02;
+
+        if (this.x < 0 || this.x > particlesCanvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > particlesCanvas.height) this.speedY *= -1;
+      }
+
+      draw() {
+        const currentOpacity = this.opacity * (0.6 + Math.sin(this.pulse) * 0.4);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 243, 255, ${currentOpacity})`;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 243, 255, ${currentOpacity * 0.15})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(new Particle());
+    }
+
+    function drawLines() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            const lineOpacity = (1 - dist / 120) * 0.15;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0, 243, 255, ${lineOpacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+      
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      
+      drawLines();
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  }
+
+
+  // ==========================================
+  // 15. MOBILE BURGER MENU
+  // ==========================================
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+
+  if (burgerBtn && mobileNav) {
+    burgerBtn.addEventListener('click', () => {
+      burgerBtn.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    mobileNav.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        burgerBtn.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+
+  // ==========================================
+  // 16. HERO PARALLAX ON SCROLL
+  // ==========================================
+  const heroWrapper = document.querySelector('.hero-wrapper');
+  const heroSection = document.querySelector('.hero-section');
+
+  if (heroWrapper && heroSection) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+
+      if (scrollY < heroBottom) {
+        const translateY = scrollY * 0.3;
+        const opacity = 1 - (scrollY / heroBottom) * 0.6;
+        heroWrapper.style.transform = `translateY(${translateY}px)`;
+        heroWrapper.style.opacity = Math.max(opacity, 0.2);
+      }
+    }, { passive: true });
+  }
+
+
+  // ==========================================
+  // 18. TEXT SPLIT REVEAL ANIMATIONS (chars / words)
+  // ==========================================
+  function splitTextNodes(element, mode) {
+    const original = element.textContent.trim().replace(/\s+/g, ' ');
+    element.textContent = '';
+
+    if (mode === 'chars') {
+      [...original].forEach((char, i) => {
+        const span = document.createElement('span');
+        span.className = 'text-split-char' + (char === ' ' ? ' is-space' : '');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.style.transitionDelay = `${i * 0.04}s`;
+        element.appendChild(span);
+      });
+    } else if (mode === 'words') {
+      original.split(' ').forEach((word, i) => {
+        const span = document.createElement('span');
+        span.className = 'text-split-word';
+        span.textContent = word;
+        span.style.transitionDelay = `${i * 0.06}s`;
+        element.appendChild(span);
+        element.appendChild(document.createTextNode(' '));
+      });
+    }
+  }
+
+  const splitElements = document.querySelectorAll('[data-animate]');
+  splitElements.forEach(el => {
+    const mode = el.getAttribute('data-animate');
+    splitTextNodes(el, mode);
+  });
+
+  if (splitElements.length > 0) {
+    const textObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+
+          // Hide cursor for typewriter elements after reveal completes
+          if (entry.target.classList.contains('text-typewriter')) {
+            const charCount = entry.target.querySelectorAll('.text-split-char').length;
+            const finishDelay = (charCount * 40) + 600 + 1500; // last char delay + transition + idle blink
+            setTimeout(() => {
+              entry.target.classList.add('is-finished');
+            }, finishDelay);
+          }
+
+          textObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '0px 0px -80px 0px' });
+
+    splitElements.forEach(el => textObserver.observe(el));
+  }
+
+
+  // ==========================================
+  // 17. BUTTON RIPPLE EFFECT
+  // ==========================================
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple-effect';
+      
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+      
+      this.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+
+
+  // ==========================================
+  // 19. 3D TILT CARDS + CURSOR SPOTLIGHT
+  // ==========================================
+  const supportsHover = window.matchMedia('(hover: hover)').matches;
+  const isWideScreen = window.innerWidth > 768;
+
+  if (supportsHover && isWideScreen) {
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    const MAX_TILT = 8; // degrees
+
+    tiltCards.forEach(card => {
+      let rafId = null;
+
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('is-tilting');
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const mx = e.clientX - rect.left;
+          const my = e.clientY - rect.top;
+
+          // Spotlight position via CSS variables
+          card.style.setProperty('--mx', `${mx}px`);
+          card.style.setProperty('--my', `${my}px`);
+
+          // Tilt: based on cursor offset from center, normalized to [-1, 1]
+          const xRel = (mx / rect.width) * 2 - 1;
+          const yRel = (my / rect.height) * 2 - 1;
+
+          const rotateY = xRel * MAX_TILT;
+          const rotateX = -yRel * MAX_TILT;
+
+          card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(0)`;
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        card.classList.remove('is-tilting');
+        card.style.transform = '';
+      });
+    });
+  }
+
+
+  // ==========================================
+  // 20. MAGNETIC BUTTONS
+  // ==========================================
+  if (supportsHover && isWideScreen) {
+    const magneticBtns = document.querySelectorAll('.btn-magnetic');
+    const PULL_STRENGTH = 0.25;
+
+    magneticBtns.forEach(btn => {
+      let rafId = null;
+
+      btn.addEventListener('mouseenter', () => {
+        btn.classList.add('is-pulling');
+      });
+
+      btn.addEventListener('mousemove', (e) => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          const rect = btn.getBoundingClientRect();
+          const mx = e.clientX - (rect.left + rect.width / 2);
+          const my = e.clientY - (rect.top + rect.height / 2);
+
+          btn.style.transform = `translate(${(mx * PULL_STRENGTH).toFixed(2)}px, ${(my * PULL_STRENGTH).toFixed(2)}px) scale(1.05)`;
+        });
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        btn.classList.remove('is-pulling');
+        btn.style.transform = '';
+      });
+    });
+  }
+
+
+  // ==========================================
+  // 22. SCROLL SPINE — VERTICAL CENTER PROGRESS LINE
+  // ==========================================
+  const scrollSpine = document.getElementById('scrollSpine');
+  const scrollSpineFill = document.getElementById('scrollSpineFill');
+  const scrollSpineBead = document.getElementById('scrollSpineBead');
+
+  if (scrollSpine && scrollSpineFill && scrollSpineBead) {
+    let spineRafId = null;
+
+    function updateScrollSpine() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
+      const percent = progress * 100;
+
+      // Fill grows downward
+      scrollSpineFill.style.height = `${percent}%`;
+
+      // Bead positioned at the leading edge of the fill
+      scrollSpineBead.style.top = `${percent}%`;
+
+      if (percent > 0.5) {
+        scrollSpine.classList.add('is-active');
+      } else {
+        scrollSpine.classList.remove('is-active');
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      if (spineRafId) cancelAnimationFrame(spineRafId);
+      spineRafId = requestAnimationFrame(updateScrollSpine);
+    }, { passive: true });
+
+    window.addEventListener('resize', updateScrollSpine, { passive: true });
+
+    // Initial sync
+    updateScrollSpine();
+  }
+
+
+  // ==========================================
+  // 21. CARD PRESS-IN ENTRANCE
+  // ==========================================
+  const pressInCards = document.querySelectorAll('.card-press-in');
+  if (pressInCards.length > 0) {
+    const pressObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          pressObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    pressInCards.forEach(card => pressObserver.observe(card));
+  }
+
 });

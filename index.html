@@ -54,7 +54,7 @@
     </script>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Fira+Code:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&family=UnifrakturMaguntia&family=Orbitron:wght@500;700;900&family=Pirata+One&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Fira+Code:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&family=UnifrakturMaguntia&family=Orbitron:wght@500;700;900&family=Pirata+One&family=JetBrains+Mono:wght@400;500;600;700&family=Tektur:wght@400;600;800;900&family=Bruno+Ace+SC&family=Russo+One&family=Audiowide&family=Space+Grotesk:wght@300;400;500;600;700&family=Unbounded:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 
@@ -83,10 +83,16 @@
     <div class="scanlines"></div>
     <div class="noise-overlay"></div>
 
+    <!-- Floating Particles Background -->
+    <canvas id="particlesCanvas"></canvas>
+
     <!-- Ambient background visuals -->
     <div class="ambient-radial"></div>
-    <div class="sword-line-bg">
-        <div class="sword-glow-bead"></div>
+    <!-- Vertical scroll progress line (center spine of the page) -->
+    <div class="scroll-spine" id="scrollSpine">
+        <div class="scroll-spine-track"></div>
+        <div class="scroll-spine-fill" id="scrollSpineFill"></div>
+        <div class="scroll-spine-bead" id="scrollSpineBead"></div>
     </div>
 
     <!-- 10. SYSTEM STARTUP BOOTLOADER (Feature 10: Progressbar Loader) -->
@@ -121,6 +127,13 @@
             </ul>
         </nav>
 
+        <!-- Burger Menu Button (Mobile) -->
+        <button class="burger-btn" id="burgerBtn" aria-label="Открыть меню">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+
         <div class="nav-actions">
             <!-- High-Tech Developer Credits Badge -->
             <div class="code-font dev-credit-badge"
@@ -142,49 +155,84 @@
         </div>
     </header>
 
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNav">
+        <a href="#hero" class="mobile-nav-link">Интро</a>
+        <a href="#stats" class="mobile-nav-link">Рейтинг</a>
+        <a href="#sotka" class="mobile-nav-link">Сотка</a>
+        <a href="#redux" class="mobile-nav-link">Редукс</a>
+        <a href="#socials" class="mobile-nav-link">Контакты</a>
+        <a href="#contact" class="mobile-nav-link">Вступить</a>
+        <a href="https://discord.gg/S3zFaA6sh" target="_blank" rel="noopener" class="mobile-nav-link"
+            style="color: var(--accent-cyan);">Discord</a>
+    </div>
+
     <!-- HERO SECTION -->
     <section id="hero" class="hero-section">
-        <div class="hero-wrapper container">
-            <div class="hero-shield">
+        <div class="hero-wrapper container hero-orchestrate">
+            <div class="hero-shield hero-stage-logo">
                 <img src="./assets/image.png" alt="EMO CLXN Master Shield" class="hero-logo" id="heroPulseLogo">
             </div>
 
-            <div class="hero-meta code-font">[ SECTOR // BURTON_DOMINANCE // MAJESTIC_RP // RAGEMP // ALT_V ]</div>
-            <h1 class="hero-title chrome-text" data-text="EMO CLXN">EMO CLXN</h1>
+            <div class="hero-meta code-font hero-stage-meta">
+                <span class="meta-typewriter">&nbsp;[ SECTOR // BURTON_DOMINANCE // MAJESTIC_RP // RAGEMP // ALT_V ]</span>
+            </div>
 
-            <p class="hero-desc">
+            <h1 class="hero-title chrome-text hero-stage-title" data-text="EMO CLXN" aria-label="EMO CLXN">
+                <span class="hero-letter hero-space" style="--i:0">&nbsp;</span><span class="hero-letter" style="--i:1">E</span><span class="hero-letter" style="--i:2">M</span><span
+                    class="hero-letter" style="--i:3">O</span><span class="hero-letter hero-space"
+                    style="--i:4">&nbsp;</span><span class="hero-letter" style="--i:5">C</span><span class="hero-letter"
+                    style="--i:6">L</span><span class="hero-letter" style="--i:7">X</span><span class="hero-letter"
+                    style="--i:8">N</span>
+            </h1>
+
+            <p class="hero-desc hero-stage-desc">
                 Доминирующий капт-состав в GTA 5 RP с 2023 года. Мы уничтожаем противников и удерживаем 100% доминацию
                 на аренах Majestic RP, RageMP и Alt:V, объединяя безупречную стрельбу и жесткую дисциплину на каптах.
                 Твой Skill — твоё единственное доказательство.
             </p>
-
-            <div class="hero-actions" style="display: flex; justify-content: center; margin-top: 30px;">
-                <a href="https://discord.gg/S3zFaA6sh" target="_blank" rel="noopener" class="btn btn-primary"
-                    style="padding: 16px 44px; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;">Вступить
-                    в состав</a>
-            </div>
         </div>
     </section>
 
     <!-- 4. STATS DASHBOARD (Feature 4: Animated Counter) -->
     <section id="stats" class="stats-section">
-        <div class="container stats-grid">
+        <div class="container stats-grid reveal-stagger tilt-perspective">
 
-            <div class="stat-box glass-panel">
+            <div class="stat-box glass-panel glow-border reveal tilt-card idle-float">
+                <div class="stat-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                </div>
                 <div class="stat-number-wrapper">
                     <span class="stat-num" data-target="100">0</span><span class="stat-plus"></span>
                 </div>
                 <div class="stat-lbl code-font">Участников в семье</div>
             </div>
 
-            <div class="stat-box glass-panel">
+            <div class="stat-box glass-panel glow-border reveal tilt-card idle-float" style="animation-delay: 1.5s;">
+                <div class="stat-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
                 <div class="stat-number-wrapper">
                     <span class="stat-num" data-target="3">0</span><span class="stat-plus"> года</span>
                 </div>
                 <div class="stat-lbl code-font">Капты в RageMP & Alt:V</div>
             </div>
 
-            <div class="stat-box glass-panel">
+            <div class="stat-box glass-panel glow-border reveal tilt-card idle-float" style="animation-delay: 3s;">
+                <div class="stat-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                </div>
                 <div class="stat-number-wrapper">
                     <span class="stat-num" data-target="80">0</span><span class="stat-plus">%</span>
                 </div>
@@ -195,26 +243,26 @@
     </section>
 
     <!-- 9. DOMINATION SECTION (Сотка) -->
-    <section id="sotka" class="sotka-section">
-        <div class="container">
+    <section id="sotka" class="sotka-section reveal">
+        <div class="container tilt-perspective">
 
             <div class="section-header">
                 <span class="section-subtitle code-font">[ ВЕЛИКИЙ ТРИУМФ ]</span>
-                <h2 class="section-title chrome-text" data-text="100% BUSINESS">100% BUSINESS</h2>
+                <h2 class="section-title chrome-text" data-text="100% BUSINESS" data-animate="chars">100% BUSINESS</h2>
                 <div class="section-divider"></div>
             </div>
 
-            <div class="domination-full-card glass-panel">
+            <div class="domination-full-card glass-panel glow-border tilt-card card-press-in">
                 <div class="domination-badge code-font">[ TRIUMPH_DETECTED // BURTON_SERVER // EST. 2026 ]</div>
 
                 <div class="domination-content-split">
                     <div class="domination-left">
-                        <h3 class="domination-large-title chrome-text" data-text="BIZWAR DOMINATION">BIZWAR DOMINATION
-                        </h3>
-                        <p class="domination-large-desc">
-                            Семья <span class="code-font" style="color: var(--accent-cyan);">EMO CLXN</span> навсегда
-                            вписала свои имена в историю сервера Burton, захватив абсолютный контроль над всеми 86/86
-                            бизнесами опасного района. Полное превосходство в тактике, стрельбе и дисциплине на каптах.
+                        <h3 class="domination-large-title chrome-text text-typewriter" data-text="BIZWAR DOMINATION"
+                            data-animate="chars">BIZWAR DOMINATION</h3>
+                        <p class="domination-large-desc" data-animate="words">
+                            Семья EMO CLXN навсегда вписала свои имена в историю сервера Burton, захватив абсолютный
+                            контроль над всеми 86/86 бизнесами опасного района. Полное превосходство в тактике, стрельбе
+                            и дисциплине на каптах.
                         </p>
                     </div>
 
@@ -244,16 +292,17 @@
     </section>
 
     <!-- 10. OFFICIAL REDUX SECTION (Наш Редукс) -->
-    <section id="redux" class="redux-section">
-        <div class="container">
+    <section id="redux" class="redux-section reveal">
+        <div class="container tilt-perspective">
 
             <div class="section-header">
                 <span class="section-subtitle code-font">[ ЭКСКЛЮЗИВНЫЙ РЕСУРС ]</span>
-                <h2 class="section-title chrome-text" data-text="Emo Spring Redux">Emo Spring Redux</h2>
+                <h2 class="section-title chrome-text" data-text="Emo Spring Redux" data-animate="chars">Emo Spring Redux
+                </h2>
                 <div class="section-divider"></div>
             </div>
 
-            <div class="redux-showcase-card glass-panel">
+            <div class="redux-showcase-card glass-panel glow-border tilt-card card-press-in">
                 <div class="redux-image-container">
                     <img src="./assets/photo_2026-05-05_18-30-24.jpg" alt="Emo Spring Redux Preview"
                         class="redux-preview-img">
@@ -264,10 +313,10 @@
                 <div class="redux-details">
                     <div class="redux-header-wrap">
                         <span class="redux-tech-badge code-font">GTA 5 RP // CAPT СБОРКА</span>
-                        <h3 class="redux-main-title">EMO SPRING REDUX</h3>
+                        <h3 class="redux-main-title" data-animate="chars">EMO SPRING REDUX</h3>
                     </div>
 
-                    <p class="redux-main-desc">
+                    <p class="redux-main-desc" data-animate="words">
                         Официальный редукс от EMO CLXN, созданный специально для каптеров. Максимальный прирост кадров в
                         секунду (FPS Boost), сочные весенние тона с летящими лепестками сакуры, идеальное сглаживание,
                         контрастные хит-маркеры попаданий и кастомные трассеры для точного контроля стрельбы.
@@ -293,7 +342,7 @@
 
                     <div class="redux-action-wrap">
                         <a href="https://youtu.be/HP5_l6GB4WA" target="_blank" rel="noopener"
-                            class="btn btn-primary code-font redux-download-btn">
+                            class="btn btn-primary code-font redux-download-btn btn-magnetic">
                             <svg viewBox="0 0 24 24" fill="currentColor"
                                 style="width: 16px; height: 16px; margin-right: 8px;">
                                 <path
@@ -318,21 +367,21 @@
     </div>
 
     <!-- 11. SOCIALS SECTION (Контакты) -->
-    <section id="socials" class="socials-section">
+    <section id="socials" class="socials-section reveal">
         <div class="container">
 
             <div class="section-header">
                 <span class="section-subtitle code-font">[ SECURE // CONNECT_SYSTEM ]</span>
-                <h2 class="section-title chrome-text" data-text="Наши Контакты">Наши Контакты</h2>
+                <h2 class="section-title chrome-text" data-text="Наши Контакты" data-animate="chars">Наши Контакты</h2>
                 <div class="section-divider"></div>
             </div>
 
             <!-- HIGH-TECH SOCIAL CONTACT CARDS GRID -->
-            <div class="contact-links-grid">
+            <div class="contact-links-grid tilt-perspective">
 
                 <!-- Discord -->
                 <a href="https://discord.gg/S3zFaA6sh" target="_blank" rel="noopener"
-                    class="contact-social-card card-discord">
+                    class="contact-social-card card-discord tilt-card">
                     <div class="social-card-glow"></div>
                     <div class="social-card-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -344,16 +393,19 @@
                         <span class="social-card-label">Discord</span>
                         <span class="social-card-handle">emoclxn</span>
                     </div>
-                    <div class="social-card-arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17l9.2-9.2M17 17V8h-9" />
+                    <div class="social-card-action">
+                        <span class="social-card-action-text">JOIN</span>
+                        <svg class="social-card-action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="13 6 19 12 13 18" />
                         </svg>
                     </div>
                 </a>
 
                 <!-- YouTube -->
                 <a href="https://youtube.com/@emoclan?si=eeXVReaNUeZdvAqD" target="_blank" rel="noopener"
-                    class="contact-social-card card-yt">
+                    class="contact-social-card card-yt tilt-card">
                     <div class="social-card-glow"></div>
                     <div class="social-card-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -365,9 +417,12 @@
                         <span class="social-card-label">YouTube</span>
                         <span class="social-card-handle">emoclan</span>
                     </div>
-                    <div class="social-card-arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17l9.2-9.2M17 17V8h-9" />
+                    <div class="social-card-action">
+                        <span class="social-card-action-text">WATCH</span>
+                        <svg class="social-card-action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="13 6 19 12 13 18" />
                         </svg>
                     </div>
                 </a>
@@ -377,33 +432,33 @@
     </section>
 
     <!-- 3. CONTACT FORM (Feature 3, 7) -->
-    <section id="contact" class="contact-section">
+    <section id="contact" class="contact-section reveal reveal-scale">
         <div class="container">
 
             <div class="section-header">
                 <span class="section-subtitle code-font">[ PROTOCOL // JOIN_THE_EMO_CLXN ]</span>
-                <h2 class="section-title chrome-text" data-text="Как Вступить">Как Вступить</h2>
+                <h2 class="section-title chrome-text" data-text="Как Вступить" data-animate="chars">Как Вступить</h2>
                 <div class="section-divider"></div>
             </div>
 
-            <div class="contact-card-panel glass-panel" style="text-align: center; padding: 50px 30px;">
+            <div class="contact-card-panel glass-panel tilt-card card-press-in"
+                style="text-align: center; padding: 50px 30px;">
                 <h3 class="contact-form-title">Создайте тикет для вступления</h3>
-                <p class="contact-form-subtitle"
+                <p class="contact-form-subtitle" data-animate="words"
                     style="max-width: 600px; margin: 0 auto 35px auto; font-size: 13px; line-height: 1.6;">
                     Подача заявок переведена в автоматический режим. Перейдите по ссылке ниже на наш официальный
-                    Дискорд-сервер, создайте тикет в канале вступления и вступайте в ряды <span class="code-font"
-                        style="color: var(--accent-cyan);">emoclxn</span>!
+                    Дискорд-сервер, создайте тикет в канале вступления и вступайте в ряды emoclxn!
                 </p>
 
                 <div style="display: flex; justify-content: center;">
                     <a href="https://discord.gg/S3zFaA6sh" target="_blank" rel="noopener"
-                        class="btn btn-primary code-font"
+                        class="btn btn-primary code-font btn-magnetic"
                         style="padding: 16px 36px; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 0 20px rgba(0, 102, 255, 0.4); display: inline-flex; align-items: center; gap: 10px; border-radius: 6px;">
                         <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;">
                             <path
                                 d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
                         </svg>
-                        СОЗДАТЬ ТИКЕТ В discord
+                        СОЗДАТЬ ТИКЕТ
                     </a>
                 </div>
             </div>
@@ -412,9 +467,21 @@
     </section>
 
     <!-- DECORATIVE CYBER FOOTER -->
-    <footer class="main-footer">
+    <footer class="main-footer reveal">
         <div class="container">
             <img src="./assets/image.png" alt="EMO CLXN Footer Icon" class="footer-nav-logo">
+
+            <div class="footer-nav-links">
+                <a href="#hero">Интро</a>
+                <a href="#stats">Рейтинг</a>
+                <a href="#sotka">Сотка</a>
+                <a href="#redux">Редукс</a>
+                <a href="#socials">Контакты</a>
+                <a href="#contact">Вступить</a>
+            </div>
+
+            <div class="footer-divider"></div>
+
             <div class="footer-copy code-font"
                 style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
                 <div>&copy; 2026 EMO CLXN // GTA 5 RP CAPT FACTION // SYSTEM RIGHTS RESERVED</div>
