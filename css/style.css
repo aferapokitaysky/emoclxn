@@ -5,7 +5,7 @@
   ╚════════════════════════════════════════════════════════════════════════════╝
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Fira+Code:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Fira+Code:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&family=UnifrakturMaguntia&family=Orbitron:wght@500;700;900&family=Pirata+One&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 /* --- Theme Variables --- */
 :root {
@@ -32,6 +32,12 @@
   --noise-opacity: 0.02;
   --transition-speed: 0.4s;
   --card-height: 420px;
+
+  /* Font Families System */
+  --font-main: 'Outfit', sans-serif;
+  --font-display: 'Chakra Petch', 'Syne', sans-serif;
+  --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-gothic: 'Pirata One', 'UnifrakturMaguntia', serif;
 }
 
 /* Light Mode Variables override */
@@ -90,7 +96,7 @@ html {
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-main);
   background-color: var(--bg-primary);
   color: var(--text-main);
   min-height: 100vh;
@@ -222,7 +228,7 @@ body.light-mode .gif-bg-layer {
 
 /* --- Typographical Styling & Headings --- */
 h1, h2, h3, h4 {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-display);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -252,7 +258,7 @@ h1, h2, h3, h4 {
 }
 
 .code-font {
-  font-family: 'Fira Code', monospace;
+  font-family: var(--font-code);
   font-size: 0.85em;
   letter-spacing: 0px;
 }
@@ -476,7 +482,7 @@ body.light-mode header {
 }
 
 .brand-text {
-  font-family: 'Pirata One', serif;
+  font-family: var(--font-gothic);
   font-size: 26px;
   font-weight: 400;
   letter-spacing: 2px;
@@ -1177,7 +1183,6 @@ body.light-mode .search-input-field {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  cursor: pointer;
 }
 
 .domination-full-card:hover {

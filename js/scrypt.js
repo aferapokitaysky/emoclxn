@@ -262,55 +262,19 @@ document.addEventListener('DOMContentLoaded', () => {
       
       lightboxContentWrapper.innerHTML = '';
       
-      // Feature check: is it our generative procedural art item?
-      if (mediaSrc === 'procedural-sigil-1') {
-        // Draw a beautiful, interactive SVG tech sigil inside lightbox!
-        const svgContainer = document.createElement('div');
-        svgContainer.style.width = '350px';
-        svgContainer.style.height = '350px';
-        svgContainer.style.display = 'flex';
-        svgContainer.style.alignItems = 'center';
-        svgContainer.style.justifyContent = 'center';
-        
-        svgContainer.innerHTML = `
-          <svg width="300" height="300" viewBox="0 0 100 100" style="filter: drop-shadow(0 0 10px rgba(0,243,255,0.8));">
-            <style>
-              .sigil-path { fill: none; stroke: var(--accent-cyan); stroke-width: 0.8; stroke-linecap: round; }
-              .core-node { fill: #ffffff; stroke: var(--accent-blue); stroke-width: 0.6; }
-              .goth-axis { stroke: var(--accent-blue); stroke-width: 0.4; stroke-dasharray: 2 1; }
-            </style>
-            <!-- Background compass lines -->
-            <line x1="50" y1="5" x2="50" y2="95" class="goth-axis" />
-            <line x1="5" y1="50" x2="95" y2="50" class="goth-axis" />
-            
-            <!-- Outward tribal spiky shapes -->
-            <path d="M 50,5 L 53,35 L 80,35 L 58,45 L 85,75 L 50,55 L 15,75 L 42,45 L 20,35 L 47,35 Z" class="sigil-path" style="stroke: var(--accent-blue);" />
-            <circle cx="50" cy="5" r="1.5" class="core-node" />
-            <circle cx="85" cy="75" r="1.5" class="core-node" />
-            <circle cx="15" cy="75" r="1.5" class="core-node" />
-            
-            <!-- Inward cyber concentric shapes -->
-            <polygon points="50,20 70,50 50,80 30,50" class="sigil-path" />
-            <circle cx="50" cy="50" r="12" class="sigil-path" />
-            <circle cx="50" cy="50" r="4" class="core-node" />
-          </svg>
-        `;
-        lightboxContentWrapper.appendChild(svgContainer);
-      } else {
-        // Render regular image elements
-        const img = document.createElement('img');
-        img.src = mediaSrc;
-        img.className = 'lightbox-img';
-        img.alt = 'EMO CLXN high definition shape view';
-        
-        lightboxContentWrapper.appendChild(img);
-        
-        // Let browser render before animating scale
-        setTimeout(() => {
-          img.style.opacity = '1';
-          img.style.transform = 'scale(1)';
-        }, 50);
-      }
+      // Render regular image elements
+      const img = document.createElement('img');
+      img.src = mediaSrc;
+      img.className = 'lightbox-img';
+      img.alt = 'EMO CLXN high definition shape view';
+      
+      lightboxContentWrapper.appendChild(img);
+      
+      // Let browser render before animating scale
+      setTimeout(() => {
+        img.style.opacity = '1';
+        img.style.transform = 'scale(1)';
+      }, 50);
 
       lightboxCaption.textContent = captionText;
       lightboxOverlay.classList.add('active');

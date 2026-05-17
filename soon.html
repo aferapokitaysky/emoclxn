@@ -12,7 +12,7 @@
     <link rel="icon" href="./assets/image.png" type="image/png">
     
     <!-- Google Fonts & Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Fira+Code:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&family=UnifrakturMaguntia&family=Orbitron:wght@500;700;900&family=Pirata+One&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -21,6 +21,12 @@
             --text-color: #ffffff;
             --muted-text: rgba(255, 255, 255, 0.4);
             --glass-border: rgba(0, 243, 255, 0.15);
+
+            /* Font Families System */
+            --font-main: 'Outfit', sans-serif;
+            --font-display: 'Chakra Petch', 'Syne', sans-serif;
+            --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+            --font-gothic: 'Pirata One', 'UnifrakturMaguntia', serif;
         }
 
         * {
@@ -33,7 +39,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Share Tech Mono', monospace;
+            font-family: var(--font-main);
             height: 100vh;
             overflow: hidden;
             display: flex;
@@ -161,7 +167,7 @@
         }
 
         .soon-text {
-            font-family: 'Pirata One', serif;
+            font-family: var(--font-gothic);
             font-size: 5rem;
             color: #ffffff;
             text-transform: lowercase;
