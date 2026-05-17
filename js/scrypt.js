@@ -443,4 +443,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Cross-frame 3D tilt coordinate publisher for Sotka iframe
+  const sotkaIframe = document.querySelector('.sotka-soon-iframe');
+  if (sotkaIframe) {
+    window.addEventListener('mousemove', (e) => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      
+      // Calculate mouse offset relative to parent window center (-1 to 1)
+      const xVal = (e.clientX - width / 2) / (width / 2);
+      const yVal = (e.clientY - height / 2) / (height / 2);
+      
+      sotkaIframe.contentWindow.postMessage({
+        type: 'mousemove',
+        relativeX: xVal,
+        relativeY: yVal,
+        isHovered: true // Keep tracking active across the entire website
+      }, '*');
+    });
+  }
 });
