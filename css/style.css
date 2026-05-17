@@ -1364,23 +1364,24 @@ body.light-mode .search-input-field {
 .redux-preview-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill; /* Stretches the image slightly vertically to fill space, showing 100% of the screenshot with zero black bars! */
   transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .redux-showcase-card:hover .redux-preview-img {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .redux-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, transparent 50%, rgba(3, 3, 5, 0.95) 100%);
+  background: linear-gradient(to right, rgba(6, 6, 8, 0.4) 0%, transparent 30%, transparent 70%, rgba(6, 6, 8, 0.4) 100%);
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {
   .redux-image-overlay {
-    background: linear-gradient(to top, rgba(3, 3, 5, 0.95) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(6, 6, 8, 0.4) 0%, transparent 100%);
   }
 }
 
