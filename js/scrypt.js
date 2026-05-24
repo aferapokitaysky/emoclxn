@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const body = document.createElement('div');
     body.className = 'toast-body code-font';
-    body.textContent = message;
+    body.innerHTML = message;
     
     toast.appendChild(indicator);
     toast.appendChild(body);
@@ -290,8 +290,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 9.2 BIZWAR ARCHIVE VIDEO PLAYER HANDLER
+  const playArchiveVideoBtn = document.getElementById('playArchiveVideo');
+  if (playArchiveVideoBtn) {
+    playArchiveVideoBtn.addEventListener('click', () => {
+      const videoId = playArchiveVideoBtn.getAttribute('data-video-id') || 'HP5_l6GB4WA';
+      lightboxContentWrapper.innerHTML = '';
+      
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      iframe.className = 'lightbox-video';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('allowfullscreen', 'true');
+      
+      lightboxContentWrapper.appendChild(iframe);
+      lightboxCaption.textContent = 'EMO CLXN // BIZWAR DOMINANCE HIGHLIGHTS [BURTON 86/86]';
+      lightboxOverlay.classList.add('active');
+      
+      updateSystemSynchronization('lightboxOpened', 15);
+    });
+  }
+
   function closeLightbox() {
     lightboxOverlay.classList.remove('active');
+    lightboxContentWrapper.innerHTML = '';
   }
 
   lightboxCloseBtn.addEventListener('click', closeLightbox);
@@ -334,30 +357,56 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const cursorDot = document.getElementById('customCursorDot');
   const cursorCircle = document.getElementById('customCursorCircle');
+  
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024;
+
+  if (isTouchDevice) {
+    // Mobile/Tablet Override: hide custom cursor elements completely and restore native cursor
+    const mobileStyle = document.createElement('style');
+    mobileStyle.innerHTML = `
+      * { cursor: auto !important; }
+      #customCursorDot, #customCursorCircle, .custom-cursor-dot, .custom-cursor-circle {
+        display: none !important;
+      }
+    `;
+    document.head.appendChild(mobileStyle);
+  }
 
   if (cursorDot && cursorCircle) {
-    let mouseX = 0;
-    let mouseY = 0;
-    let circleX = 0;
-    let circleY = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let circleX = mouseX;
+    let circleY = mouseY;
+    let cursorVisible = false;
 
     // Track mouse coordinates
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
+      if (!isTouchDevice) {
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+        
+        // Reveal custom cursor elements smoothly on first movement to avoid 0,0 page-load freeze
+        if (!cursorVisible) {
+          cursorDot.classList.add('visible');
+          cursorCircle.classList.add('visible');
+          cursorVisible = true;
+        }
+      }
     });
 
     // Smooth spring lag for outer ring
     function updateCirclePosition() {
-      const delay = 0.15; // spring rate
-      circleX += (mouseX - circleX) * delay;
-      circleY += (mouseY - circleY) * delay;
+      if (!isTouchDevice) {
+        const delay = 0.15; // spring rate
+        circleX += (mouseX - circleX) * delay;
+        circleY += (mouseY - circleY) * delay;
 
-      cursorCircle.style.left = `${circleX}px`;
-      cursorCircle.style.top = `${circleY}px`;
+        cursorCircle.style.left = `${circleX}px`;
+        cursorCircle.style.top = `${circleY}px`;
+      }
 
       requestAnimationFrame(updateCirclePosition);
     }
@@ -369,10 +418,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Delegate listeners or attach directly
     document.querySelectorAll(hoverablesSelector).forEach(el => {
       el.addEventListener('mouseenter', () => {
-        document.body.classList.add('cursor-active');
+        if (!isTouchDevice) {
+          document.body.classList.add('cursor-active');
+        }
       });
       el.addEventListener('mouseleave', () => {
-        document.body.classList.remove('cursor-active');
+        if (!isTouchDevice) {
+          document.body.classList.remove('cursor-active');
+        }
       });
     });
   }
@@ -914,5 +967,59 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { passive: true });
+
+  // Animated Redux progress scales fill with staggered cascade reveal after text animation finishes
+  const reduxSection = document.getElementById('redux');
+  const scaleFills = document.querySelectorAll('.redux-scale-fill');
+  
+  if (reduxSection && scaleFills.length > 0) {
+    const scaleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Wait 1500ms for the character/word text split animations to mostly finish
+          setTimeout(() => {
+            scaleFills.forEach((fill, index) => {
+              const item = fill.closest('.redux-feature-item');
+              if (item) {
+                // Staggered reveal: each item fades and rises one after another
+                setTimeout(() => {
+                  item.style.opacity = '1';
+                  item.style.transform = 'translateY(0)';
+                  
+                  // Fill the progress bar 250ms after the container shows up
+                  setTimeout(() => {
+                    const targetVal = fill.getAttribute('data-value');
+                    fill.style.width = `${targetVal}%`;
+                  }, 250);
+                }, index * 250); // 250ms stagger step between items
+              }
+            });
+          }, 1500);
+          
+          scaleObserver.disconnect(); // Trigger animation only once
+        }
+      });
+    }, { threshold: 0.15 });
+    
+    scaleObserver.observe(reduxSection);
+  }
+
+  // ==========================================
+  // 11. CLICK TO COPY DISCORD CONTACT (With glowing notification popup)
+  // ==========================================
+  document.querySelectorAll('.copy-discord').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const discordName = el.getAttribute('data-discord') || 'aferapokitaisky';
+      const svgIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px; display: inline-block; filter: drop-shadow(0 0 3px var(--accent-cyan));"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+      
+      navigator.clipboard.writeText(discordName).then(() => {
+        notify(`${svgIcon}Discord ${discordName} скопирован!`, 'success', 4000);
+      }).catch(err => {
+        console.error('Could not copy contact: ', err);
+        notify(`Discord: ${discordName}`, 'info', 4000);
+      });
+    });
+  });
 
 });

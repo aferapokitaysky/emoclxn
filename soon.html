@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <script>
         try {
@@ -26,14 +27,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMO CLXN — GTA 5 RP | Majestic RP, RageMP & Alt:V Domination</title>
-    <meta name="description" content="Официальный сайт капт фамы EMO CLXN. Burton Domination, Majestic RP, RageMP и Alt:V капты. Раздел находится в стадии разработки.">
-    <meta name="keywords" content="gta 5 rp, majestic rp, ragemp, alt:v, capt fam, капт фама, гетто majestic, стрельба majestic, rage mp capt, alt v gta 5, heavy pistol, shadowplay, emo clxn">
+    <meta name="description"
+        content="Официальный сайт капт фамы EMO CLXN. Burton Domination, Majestic RP, RageMP и Alt:V капты. Раздел находится в стадии разработки.">
+    <meta name="keywords"
+        content="gta 5 rp, majestic rp, ragemp, alt:v, capt fam, капт фама, гетто majestic, стрельба majestic, rage mp capt, alt v gta 5, heavy pistol, shadowplay, emo clxn">
     <link rel="canonical" href="https://www.emoclxn.tech/soon.html">
+
+
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/emo-clxn-logo.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EMO CLXN">
+    <meta name="theme-color" content="#060608">
+    <meta name="msapplication-TileColor" content="#060608">
+    <meta name="msapplication-TileImage" content="./assets/emo-clxn-logo.png">
+    <meta name="geo.region" content="RU">
+    <meta name="geo.placename" content="Burton Sector">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <!-- <meta name="google-site-verification" content="YOUR_GOOGLE_TOKEN"> -->
+    <!-- <meta name="yandex-verification" content="YOUR_YANDEX_TOKEN"> -->
     <link rel="icon" href="./assets/emo-clxn-logo.png" type="image/png">
-    
+
+    <!-- OpenGraph Social Metadata (Discord, Telegram, VK) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EMO CLXN — GTA 5 RP | Majestic RP, RageMP & Alt:V Domination">
+    <meta property="og:description"
+        content="Официальный сайт капт фамы EMO CLXN. Burton Domination, Majestic RP, RageMP и Alt:V капты. Раздел находится в стадии разработки.">
+    <meta property="og:url" content="https://www.emoclxn.tech/soon.html">
+    <meta property="og:image" content="https://www.emoclxn.tech/assets/emo-clxn-logo.png">
+    <meta property="og:site_name" content="EMO CLXN">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EMO CLXN — GTA 5 RP | Majestic RP, RageMP & Alt:V Domination">
+    <meta name="twitter:description"
+        content="Официальный сайт капт фамы EMO CLXN. Burton Domination, Majestic RP, RageMP и Alt:V капты. Раздел находится в стадии разработки.">
+    <meta name="twitter:image" content="https://www.emoclxn.tech/assets/emo-clxn-logo.png">
+
     <!-- Google Fonts & Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Fira+Code:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&family=UnifrakturMaguntia&family=Orbitron:wght@500;700;900&family=Pirata+One&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Fira+Code:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&family=UnifrakturMaguntia&family=Orbitron:wght@500;700;900&family=Pirata+One&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #000000;
@@ -53,7 +90,8 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: none; /* Hide default cursor to use LERP custom target */
+            cursor: none;
+            /* Hide default cursor to use LERP custom target */
         }
 
         body {
@@ -66,7 +104,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            perspective: 1000px; /* Enable 3D perspective */
+            perspective: 1000px;
+            /* Enable 3D perspective */
         }
 
         .embedded body {
@@ -81,15 +120,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                rgba(18, 16, 16, 0) 50%, 
-                rgba(0, 0, 0, 0.25) 50%
-            ), linear-gradient(
-                90deg,
-                rgba(255, 0, 0, 0.06),
-                rgba(0, 255, 0, 0.02),
-                rgba(0, 0, 255, 0.06)
-            );
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+                    rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg,
+                    rgba(255, 0, 0, 0.06),
+                    rgba(0, 255, 0, 0.02),
+                    rgba(0, 0, 255, 0.06));
             background-size: 100% 4px, 6px 100%;
             pointer-events: none;
             z-index: 99;
@@ -138,7 +173,8 @@
             align-items: center;
             justify-content: center;
             gap: 50px;
-            transform: translateZ(50px); /* Lift logos in 3D */
+            transform: translateZ(50px);
+            /* Lift logos in 3D */
             margin-bottom: 50px;
         }
 
@@ -166,7 +202,8 @@
             width: auto;
             object-fit: contain;
             display: block;
-            mix-blend-mode: screen; /* Instantly crop black background */
+            mix-blend-mode: screen;
+            /* Instantly crop black background */
         }
 
         /* Vertical Divider Line */
@@ -181,7 +218,8 @@
 
         /* 3D Liquid Chrome Gothic Text */
         .soon-text-container {
-            transform: translateZ(80px); /* Higher 3D lift for depth */
+            transform: translateZ(80px);
+            /* Higher 3D lift for depth */
             margin-top: 20px;
             text-align: center;
         }
@@ -194,7 +232,7 @@
             letter-spacing: 0.15em;
             display: inline-block;
             position: relative;
-            text-shadow: 
+            text-shadow:
                 0 0 8px rgba(0, 243, 255, 0.4),
                 0 1px 0 #e0e0e0,
                 0 2px 0 #cccccc,
@@ -270,6 +308,7 @@
                 opacity: 0.6;
                 box-shadow: 0 0 10px var(--accent-cyan);
             }
+
             to {
                 height: 100px;
                 opacity: 1;
@@ -280,7 +319,7 @@
         @keyframes floatText {
             from {
                 transform: translateY(0) rotate(0deg);
-                text-shadow: 
+                text-shadow:
                     0 0 8px rgba(0, 243, 255, 0.4),
                     0 1px 0 #e0e0e0,
                     0 2px 0 #cccccc,
@@ -289,9 +328,10 @@
                     0 5px 0 #8e8e8e,
                     0 6px 8px rgba(0, 0, 0, 0.6);
             }
+
             to {
                 transform: translateY(-8px) rotate(-1deg);
-                text-shadow: 
+                text-shadow:
                     0 0 18px rgba(0, 243, 255, 0.7),
                     0 1px 0 #ffffff,
                     0 2px 0 #f0f0f0,
@@ -307,21 +347,26 @@
             .logo-row {
                 gap: 25px;
             }
+
             .logo-emo {
                 height: 80px;
             }
+
             .logo-gta {
                 height: 75px;
             }
+
             .divider {
                 height: 60px;
             }
+
             .soon-text {
                 font-size: 3.5rem;
             }
         }
     </style>
 </head>
+
 <body>
 
     <!-- CRT Visual Overlays -->
@@ -331,20 +376,20 @@
 
     <!-- 3D Parallax Container -->
     <div class="tilt-container" id="tiltContainer">
-        
+
         <!-- Symmetrical Logos Row -->
         <div class="logo-row">
             <div class="logo-wrapper">
                 <img src="./assets/image.png" alt="EMO CLXN Majestic RP Esports Shield" class="logo-emo">
             </div>
-            
+
             <div class="divider"></div>
-            
+
             <div class="logo-wrapper">
                 <img src="./assets/gta5rp.png" alt="GTA 5 RP RageMP Alt:V Capture Domination Logo" class="logo-gta">
             </div>
         </div>
-        
+
         <!-- Metallic Gothic soon.. -->
         <div class="soon-text-container">
             <h1 class="soon-text">soon..</h1>
@@ -353,13 +398,14 @@
         <!-- Back Button -->
         <div class="back-btn-container">
             <a href="index.html" class="back-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="width: 12px; height: 12px;">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
                 Вернуться назад
             </a>
         </div>
-        
+
     </div>
 
     <!-- High-Tech Custom Target Cursor -->
@@ -383,7 +429,7 @@
                 if (backBtn) backBtn.style.display = 'none';
                 if (curDot) curDot.style.display = 'none';
                 if (curCirc) curCirc.style.display = 'none';
-                
+
                 // Adjust card styling when embedded inside the iframe
                 document.body.style.background = 'transparent';
                 document.body.style.cursor = 'none';
@@ -397,14 +443,14 @@
         // Custom LERP Cursor Logic
         const cursorDot = document.getElementById('cursorDot');
         const cursorCircle = document.getElementById('cursorCircle');
-        
+
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let dotX = mouseX;
         let dotY = mouseY;
         let circleX = mouseX;
         let circleY = mouseY;
-        
+
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
@@ -445,7 +491,7 @@
 
         // Track logo hovers
         document.querySelectorAll('.logo-wrapper').forEach(wrapper => {
-            wrapper.addEventListener('mouseenter', function() {
+            wrapper.addEventListener('mouseenter', function () {
                 const img = this.querySelector('img');
                 const altText = img ? img.getAttribute('alt') : 'logo';
                 trackGaEvent('hover_logo_soon', 'Teaser Card Interactions', `Hovered ${altText}`);
@@ -457,17 +503,17 @@
             // Instant dot
             dotX += (mouseX - dotX) * 0.3;
             dotY += (mouseY - dotY) * 0.3;
-            
+
             // Slow lag circle
             circleX += (mouseX - circleX) * 0.12;
             circleY += (mouseY - circleY) * 0.12;
-            
+
             cursorDot.style.left = `${dotX}px`;
             cursorDot.style.top = `${dotY}px`;
-            
+
             cursorCircle.style.left = `${circleX}px`;
             cursorCircle.style.top = `${circleY}px`;
-            
+
             requestAnimationFrame(updateCursor);
         }
         updateCursor();
@@ -475,29 +521,29 @@
         // 3D Parallax Tilt Effect
         const tiltContainer = document.getElementById('tiltContainer');
         const maxTilt = 15; // Max angle in degrees
-        
+
         window.addEventListener('mousemove', (e) => {
             const width = window.innerWidth;
             const height = window.innerHeight;
-            
+
             // Calculate cursor offset from center (-1 to 1)
             const xVal = (e.clientX - width / 2) / (width / 2);
             const yVal = (e.clientY - height / 2) / (height / 2);
-            
+
             // Rotate card accordingly (invert Y for natural tilt)
             const rotateX = (-yVal * maxTilt).toFixed(2);
             const rotateY = (xVal * maxTilt).toFixed(2);
-            
+
             tiltContainer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
-        
+
         // Listen for parent page mouse coordinates for cross-frame 3D tilt tracking
         window.addEventListener('message', (e) => {
             if (e.data && e.data.type === 'mousemove') {
                 if (e.data.isHovered) {
                     const rotateX = (-e.data.relativeY * maxTilt).toFixed(2);
                     const rotateY = (e.data.relativeX * maxTilt).toFixed(2);
-                    
+
                     if (tiltContainer) {
                         tiltContainer.style.transition = 'transform 0.1s ease-out';
                         tiltContainer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
@@ -511,7 +557,7 @@
                 }
             }
         });
-        
+
         // Reset tilt on leave (standalone page mode)
         window.addEventListener('mouseleave', () => {
             if (tiltContainer) {
@@ -521,4 +567,5 @@
         });
     </script>
 </body>
+
 </html>
