@@ -1303,7 +1303,7 @@ body.light-mode .search-input-field {
 
 .domination-content-split {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1fr 1.5fr;
   gap: 40px;
   align-items: center;
 }
@@ -1322,7 +1322,7 @@ body.light-mode .search-input-field {
 }
 
 .domination-large-title {
-  font-size: 38px;
+  font-size: 28px;
   letter-spacing: 2px;
   color: #fff;
   line-height: 1.1;
@@ -1414,6 +1414,289 @@ body.light-mode .search-input-field {
   color: var(--text-sub);
   letter-spacing: 1.5px;
   text-transform: uppercase;
+}
+
+/* Premium Nickname Tickers Styling */
+.sotka-ticker-wrapper {
+  background: rgba(2, 2, 4, 0.3);
+  border: 1px solid rgba(0, 243, 255, 0.06);
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.02);
+  margin: 10px 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.5s ease;
+  animation: ticker-border-glow 8s infinite ease-in-out;
+}
+
+.domination-full-card:hover .sotka-ticker-wrapper {
+  border-color: rgba(0, 243, 255, 0.16);
+  box-shadow: inset 0 0 25px rgba(0, 243, 255, 0.03), 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Sweeping tactical laser/scanline */
+.ticker-scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 243, 255, 0.015) 30%, 
+    rgba(0, 243, 255, 0.06) 50%, 
+    rgba(0, 243, 255, 0.015) 70%, 
+    transparent 100%
+  );
+  width: 40%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  transform: translateX(-150%);
+  animation: ticker-scan-sweep 7s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes ticker-scan-sweep {
+  0% {
+    transform: translateX(-150%);
+  }
+  40%, 100% {
+    transform: translateX(300%);
+  }
+}
+
+@keyframes ticker-border-glow {
+  0%, 100% {
+    border-color: rgba(0, 243, 255, 0.06);
+    box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.02);
+  }
+  50% {
+    border-color: rgba(0, 102, 255, 0.18);
+    box-shadow: inset 0 0 25px rgba(0, 102, 255, 0.04), 0 0 10px rgba(0, 102, 255, 0.02);
+  }
+}
+
+.ticker-header-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  padding-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.ticker-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 1.5px;
+}
+
+.ticker-status {
+  font-size: 9px;
+  color: var(--accent-cyan);
+  text-shadow: var(--glow-cyan);
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pulse-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: var(--glow-cyan);
+  animation: pulse-double-flash 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+@keyframes pulse-double-flash {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.4;
+    box-shadow: 0 0 0 0 rgba(0, 243, 255, 0);
+  }
+  15% {
+    transform: scale(1.2);
+    opacity: 1;
+    box-shadow: 0 0 8px 3px rgba(0, 243, 255, 0.4);
+  }
+  30% {
+    transform: scale(0.95);
+    opacity: 0.6;
+    box-shadow: 0 0 2px 1px rgba(0, 243, 255, 0.1);
+  }
+  45% {
+    transform: scale(1.25);
+    opacity: 1;
+    box-shadow: 0 0 10px 4px rgba(0, 243, 255, 0.45);
+  }
+  60%, 80% {
+    transform: scale(0.85);
+    opacity: 0.4;
+    box-shadow: 0 0 0 0 rgba(0, 243, 255, 0);
+  }
+}
+
+.sotka-ticker-track {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 20px;
+  padding: 4px 0;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+.sotka-ticker-list {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 100%;
+  justify-content: space-around;
+}
+
+.scroll-left .sotka-ticker-list {
+  animation: ticker-slide-left 32s linear infinite;
+}
+
+.scroll-right .sotka-ticker-list {
+  animation: ticker-slide-right 34s linear infinite;
+}
+
+.sotka-ticker-track:hover .sotka-ticker-list {
+  animation-play-state: paused;
+}
+
+@keyframes ticker-slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% - 20px));
+  }
+}
+
+@keyframes ticker-slide-right {
+  0% {
+    transform: translateX(calc(-100% - 20px));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.ticker-badge {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(2, 2, 4, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 5px;
+  padding: 5px 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  letter-spacing: 0.8px;
+  cursor: pointer;
+}
+
+.ticker-badge:hover {
+  border-color: var(--accent-cyan);
+  color: #fff;
+  background: rgba(0, 243, 255, 0.03);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.12), inset 0 0 8px rgba(0, 243, 255, 0.04);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.scroll-right .ticker-badge:hover {
+  border-color: var(--accent-blue);
+  background: rgba(0, 102, 255, 0.04);
+  box-shadow: 0 0 12px rgba(0, 102, 255, 0.16), inset 0 0 8px rgba(0, 102, 255, 0.04);
+}
+
+.badge-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.badge-dot.cyan {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 5px var(--accent-cyan);
+}
+
+.badge-dot.blue {
+  background: var(--accent-blue);
+  box-shadow: 0 0 5px var(--accent-blue);
+}
+
+.ticker-badge:hover .badge-dot {
+  transform: scale(1.4);
+}
+
+@media (max-width: 600px) {
+  .sotka-ticker-wrapper {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  
+  .ticker-header-meta {
+    padding-bottom: 8px;
+  }
+  
+  .ticker-badge {
+    font-size: 9px;
+    padding: 4px 10px;
+    gap: 5px;
+  }
+  
+  .sotka-ticker-track {
+    gap: 12px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  }
+  
+  .sotka-ticker-list {
+    gap: 12px;
+  }
+  
+  .scroll-left .sotka-ticker-list {
+    animation: ticker-slide-left-mobile 25s linear infinite;
+  }
+
+  .scroll-right .sotka-ticker-list {
+    animation: ticker-slide-right-mobile 27s linear infinite;
+  }
+  
+  @keyframes ticker-slide-left-mobile {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% - 12px));
+    }
+  }
+
+  @keyframes ticker-slide-right-mobile {
+    0% {
+      transform: translateX(calc(-100% - 12px));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
 }
 
 
@@ -2206,8 +2489,102 @@ footer.main-footer {
   transform: scale(1.01);
 }
 
+/* 100% Domination Screenshot Card */
+.sotka-screenshot-card {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 460px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  cursor: pointer;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  background: #000;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sotka-screenshot-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: var(--glow-cyan), 0 20px 45px rgba(0, 0, 0, 0.8);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.sotka-screenshot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: all 0.5s ease;
+}
+
+.sotka-screenshot-card:hover .sotka-screenshot-img {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.screenshot-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle,
+    rgba(2, 2, 4, 0.1) 0%,
+    rgba(2, 2, 4, 0.75) 100%
+  );
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.sotka-screenshot-card:hover .screenshot-overlay {
+  opacity: 1;
+  background: radial-gradient(
+    circle,
+    rgba(2, 2, 4, 0) 0%,
+    rgba(2, 2, 4, 0.5) 100%
+  );
+}
+
+.zoom-indicator {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(2, 2, 4, 0.95);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  padding: 6px 14px;
+  border-radius: 4px;
+  letter-spacing: 1.5px;
+  box-shadow: var(--glow-cyan);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.sotka-screenshot-card:hover .zoom-indicator {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  border-color: var(--accent-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.screenshot-scan-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(rgba(0, 243, 255, 0.05) 1.5px, transparent 1.5px);
+  background-size: 100% 4px;
+  z-index: 3;
+}
+
 @media (max-width: 768px) {
   .sotka-soon-iframe {
+    height: 300px;
+  }
+  .sotka-screenshot-card {
     height: 300px;
   }
 }
