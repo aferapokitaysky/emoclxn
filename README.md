@@ -10,104 +10,177 @@
   <img src="https://img.shields.io/badge/GTA_5_RP-Burton-00F3FF?style=for-the-badge&logo=gtav&logoColor=white&labelColor=060608" alt="Server">
   <img src="https://img.shields.io/badge/STYLE-LIQUID_CHROME-0056FF?style=for-the-badge&labelColor=060608" alt="Design">
   <img src="https://img.shields.io/badge/TECH-Y2K_GOTH_TECH-black?style=for-the-badge&logo=javascript&logoColor=00F3FF&labelColor=060608" alt="Tech">
+  <img src="https://img.shields.io/badge/STACK-HTML_CSS_JS-black?style=for-the-badge&logo=html5&logoColor=00F3FF&labelColor=060608" alt="Stack">
+</p>
+
+<p align="center">
+  <b>🇬🇧 <a href="#-about">English</a></b> &nbsp;|&nbsp; <b>🇷🇺 <a href="#-о-проекте-ru">Русский</a></b>
 </p>
 
 ---
 
-## 💎 О ПРОЕКТЕ
+## 🇬🇧 About
 
-**EMO CLXN** — официальный, премиальный промо-портал легендарной капт-фамы в **GTA 5 RP**. Этот сайт создан как интерактивное визуальное заявление: сочетание темной готической эстетики, жидкого хрома, глитч-эффектов Y2K, тяжелого металла и передовых тактических фронтенд-анимаций.
+**EMO CLXN** is the official promo site for **EMO CLXN**, a "capt" (capture) faction / crew on a **GTA 5 RP** roleplay server (Burton), running across **Majestic RP, RageMP and Alt:V**. It's a fan/community portal — not a game mod or plugin — built to look and feel like a tactical HUD: dark gothic aesthetic, liquid-chrome text, Y2K glitch touches, and a custom crosshair cursor.
 
----
+There is no backend. It's a static site (plain HTML/CSS/JS) hosted on GitHub Pages, meant to be the crew's public face: who they are, what they've achieved on the server, and how to join.
 
-## ⚡️ ПРЕМИАЛЬНЫЕ ФУНКЦИИ И ИНТЕРАКТИВ
+### What a visitor sees
 
-* **🪐 Cyber-Target Crosshair Cursor**:
-  * Кастомный игровой прицел-курсор, состоящий из яркого ядра-точки (`.custom-cursor-dot`) и следующего за ней с физическим лагом (Spring Interpolation LERP) внешнего тактического круга (`.custom-cursor-circle`).
-  * При наведении на кнопки или интерактивные элементы курсор переключается в **режим захвата цели**: внешняя окружность расширяется, становится штрихованной (dashed) и горит неоновым синим свечением.
-* **🎬 Бизвар Архив «Сотка» & Лайтбокс-Плеер**:
-  * **Видоискатель Tactical HUD (CSS-only):** Превью видеовыпуска бизваров заменено на полностью анимированную на CSS голографическую панель с раздвижными прицельными уголками, мигающим индикатором записи `● REC` и мягко пульсирующим неоном призывом `[ PLAY ARCHIVE ]`.
-  * **Ленивая загрузка (Lazy Load):** Обложка видео не подгружает тяжелые скрипты YouTube при старте, экономя ресурсы LCP. При клике фрейм плеера динамически инжектируется в полноэкранный лайтбокс с параметром `autoplay=1`.
-  * **Мгновенная отсечка звука:** При закрытии лайтбокса (кликом на крестик или мимо окна) фрейм YouTube полностью уничтожается (`innerHTML = ''`), исключая фоновую утечку звука или видео.
-  * **Брендированная кнопка YouTube:** В кнопку «СМОТРЕТЬ НА YOUTUBE» встроена SVG-иконка. При наведении логотип плавно загорается насыщенно-красным цветом с неоновой пульсирующей тенью.
-* **⛪ Готический брендинг и Pirata One**:
-  * Логотип слева вверху увеличен до внушительных **56px** с интерактивным масштабированием и легким поворотом на ховере.
-  * Надпись `emoclxn` выполнена брутальным средневековым готическим шрифтом **`Pirata One`**, подчеркивающим суровый стиль cyber-sigilism.
-* **🚀 Сленговый Bootloader загрузки**:
-  * На старте сайта воспроизводится аутентичная каптерская загрузка со сленговыми логами гетто-состава («Заряжаем каптерку», «Лоудим ревики/карабины», «Греем спанк», «100/100 арена дуэли», «ShadowPlay активен»).
-* **🔝 Смарт-Шапка (Smart Auto-Hide Header)**:
-  * Навигационная панель автоматически скрывается при скролле вниз.
-  * Панель мгновенно выезжает обратно при скролле вверх или при подведении курсора к самому верхнему краю экрана (`y <= 25px`).
-  * Из шапки полностью удалена лишняя кнопка `JOIN_CLXN`, а бадж создателей `PROD BY PTRKXLORD // aferapokitaisky` значительно увеличен (шрифт `11px`, паддинги `8px 16px`, иконка `13px`) для престижности и читаемости.
-* **📋 Интерактивное копирование Discord в один клик**:
-  * Оба упоминания Discord-контакта `aferapokitaisky` (в шапке и в подвале) снабжены классом `.copy-discord` и анимированы стильным кибер-мерцанием `@keyframes cyber-flicker`.
-  * При клике никнейм копируется в буфер обмена пользователя и выводит сбоку экрана красивейшее неоновое уведомление с **векторной иконкой буфера обмена (двойные листы копирования)**: `Discord aferapokitaisky скопирован!`, полностью избавившись от лишнего префикса `[ SYSTEM ]`.
-* **🎯 Ховер-эффект Cyber Brackets**:
-  * При наведении на пункты меню по краям ссылки плавно выезжают неоновые скобки `[` и `]`, создавая эффект захвата цели в прицел.
-* **📈 Анимированные счетчики опыта**:
-  * Анимированный дашборд с триггером скролла (`IntersectionObserver`), который считает до целевых значений:
-    * `100` Участников в семье
-    * `3 года` В каптах
-    * `80%` WINRATE
+- **Boot sequence** — a startup loader with in-character "capt slang" status lines before the page reveals itself.
+- **Intro / Hero** — the EMO CLXN shield logo, animated chrome title, and a mission-style tagline.
+- **Stats dashboard** — animated counters (roster size, years active, win rate) that count up on scroll.
+- **"Сотка" (The Hundred)** — a showcase of the crew's 86/86 business takeover on the Burton server, with a zoomable screenshot and a scrolling ticker of member nicknames.
+- **Emo Spring Redux** — a promo card for the crew's custom GTA graphics/FPS redux, linking to a YouTube overview.
+- **Contacts** — cards linking out to the crew's Discord and YouTube.
+- **How to join** — a call-to-action pointing to the Discord ticket channel.
+- **`soon.html`** — a standalone "coming soon" placeholder page for a section still in development.
 
----
+### Interactive extras
 
-## 📈 ГЛУБОКАЯ СЕО-ОПТИМИЗАЦИЯ (SEO)
+- Custom crosshair-style cursor that snaps into a "target lock" state over clickable elements.
+- Lazy-loaded YouTube lightbox for the archive video (nothing loads until you click play).
+- Click-to-copy Discord handle with an on-screen toast notification.
+- Scroll-based auto-hiding header, scroll-progress spine, and section reveal/stagger animations.
+- Light/dark theme toggle persisted via `localStorage`.
+- Canvas-based floating particle background.
+- Full SEO pass: JSON-LD (`SportsOrganization`) schema, OpenGraph/Twitter cards, `robots.txt`, `sitemap.xml`, and a `site.webmanifest` for PWA-style install/icons.
 
-* **Heading Structure:** Идеальный заголовочный скелет: ровно один тег `<h1>` (`EMO CLXN`) в Intro и логические подзаголовки `<h2>` для разделов.
-* **JSON-LD Schema Markup:** Внедрены структурированные данные JSON-LD по стандарту `SportsOrganization`, описывающие фаму, Discord-связи, YouTube-видео и Burton Server.
-* **Image Alt Tags:** Абсолютно все картинки оптимизированы и содержат высококачественные описания `alt` для роботов Google Images.
-* **Social Previews (OpenGraph):** Для страниц `index.html` и `soon.html` настроены полноценные карточки OpenGraph и Twitter Cards. При отправке ссылки в Discord, TG или VK генерируется красивая готическая тактическая плашка.
-* **Robots.txt & Sitemap.xml:** Полностью переработаны правила обхода поисковиками (Google, Yandex) и блокировка агрессивных AI-ботов. Sitemap.xml снабжен картой картинок и видеотегов.
+### Tech stack
 
----
+Plain, dependency-free front end — no framework, no build step:
 
-## 📂 СТРУКТУРА ПАПОК
+- **HTML5** — `index.html`, `soon.html`
+- **CSS3** — `css/style.css` (custom properties, animations, glassmorphism/chrome effects)
+- **Vanilla JavaScript** — `js/scrypt.js` (DOM/scroll effects, canvas particles, lightbox, counters, theming)
+- **Google Fonts** (Outfit, Syne, Orbitron, Pirata One, JetBrains Mono, etc.) and **Google Analytics (gtag.js)**
 
-Код проекта организован по чистому стандарту веб-разработки:
+### Project structure
 
-```bash
+```
 emoclxn/
-├── assets/                          # Изображения, GIF-фоны и ассеты
+├── assets/                          # Logo, GIF background, screenshots
+│   ├── image.png                    # Main shield logo
+│   ├── emo-clxn-logo.png            # Favicon / touch icon
 │   ├── emoshapes-ezgif.com-optimize.gif
-│   ├── image.png
 │   ├── gta5rp.png
-│   ├── gta_map_tactical.png         # [NEW] Тактическая HUD-карта (архив)
-│   └── photo_2026-05-05_18-30-24.jpg
-├── css/                             # Стили CSS
-│   └── style.css
-├── js/                              # Логика и курсор JavaScript
-│   └── scrypt.js
-├── index.html                       # Главный HTML-файл
-├── soon.html                        # Страница анонса / разработки
-├── robots.txt                       # Инструкции поисковых роботов
-├── site.webmanifest                 # PWA-манифест
-├── sitemap.xml                      # Карта сайта для Google/Yandex
-└── README.md                        # Документация проекта
+│   ├── gta_map_tactical.png
+│   ├── photo_2026-05-05_18-30-24.jpg
+│   └── sotka_screenshot.png
+├── css/
+│   └── style.css                    # All styling & animation
+├── js/
+│   └── scrypt.js                    # Interactivity & effects
+├── index.html                       # Main landing page
+├── soon.html                        # "Coming soon" placeholder page
+├── robots.txt                       # Crawler rules
+├── sitemap.xml                      # Sitemap for Google/Yandex
+├── site.webmanifest                 # PWA manifest
+├── CNAME                            # Custom domain for GitHub Pages
+└── README.md
 ```
 
+### Run it locally
+
+No build tools, no dependencies — it's static HTML.
+
+```bash
+git clone https://github.com/aferapokitaysky/emoclxn.git
+cd emoclxn
+```
+
+Then either:
+
+- Open `index.html` directly in a browser, **or**
+- Serve it locally so relative paths/fonts behave the same as in production:
+
+```bash
+python3 -m http.server 8000
+# then visit http://localhost:8000
+```
+
+### Credits
+
+- **Production**: `PROD BY PTRKXLORD`
+- **Discord contact**: `aferapokitaisky`
+
 ---
 
-## 🚀 БЫСТРЫЙ ЗАПУСК
+## 🇷🇺 О проекте (RU)
 
-1. Клонируйте репозиторий:
-   ```bash
-   git clone https://github.com/aferapokitaysky/emoclxn.git
-   ```
-2. Перейдите в папку проекта:
-   ```bash
-   cd emoclxn
-   ```
-3. Откройте файл `index.html` в любом современном веб-браузере.
+**EMO CLXN** — официальный промо-сайт капт-фамы **EMO CLXN** на сервере **GTA 5 RP** (Burton), работающей на **Majestic RP, RageMP и Alt:V**. Это фан/комьюнити-портал, а не мод или плагин к игре — визитная карточка состава: кто они, чего добились на сервере и как вступить.
+
+Сайт полностью статический (чистые HTML/CSS/JS), без бэкенда, размещён на GitHub Pages. Оформление — тёмная готика, жидкий хром, глитч-эффекты Y2K и кастомный курсор-прицел.
+
+### Что видит посетитель
+
+- **Загрузочный экран** — стартовый лоадер со сленговыми каптерскими статусами перед появлением сайта.
+- **Интро** — щит-логотип EMO CLXN, анимированный хромовый заголовок и слоган.
+- **Дашборд статистики** — анимированные счётчики (состав, годы в каптах, винрейт), считающие при скролле.
+- **«Сотка»** — витрина захвата 86/86 бизнесов на сервере Burton, с увеличиваемым скриншотом и бегущей строкой никнеймов состава.
+- **Emo Spring Redux** — промо-карточка фирменного графического/FPS-редукса со ссылкой на обзор на YouTube.
+- **Контакты** — карточки со ссылками на Discord и YouTube семьи.
+- **Как вступить** — призыв к действию со ссылкой на канал создания тикета в Discord.
+- **`soon.html`** — отдельная страница-заглушка «скоро» для раздела, который ещё в разработке.
+
+### Интерактив
+
+- Кастомный курсор-прицел, переключающийся в режим «захвата цели» над кликабельными элементами.
+- Лайтбокс с ленивой загрузкой YouTube-видео архива (ничего не грузится до клика на плей).
+- Копирование Discord-ника по клику с всплывающим уведомлением.
+- Смарт-шапка, скрывающаяся при скролле, индикатор прогресса скролла и плавные анимации появления секций.
+- Переключатель светлой/тёмной темы с сохранением в `localStorage`.
+- Фоновые частицы на `<canvas>`.
+- Глубокая SEO-настройка: JSON-LD-разметка (`SportsOrganization`), OpenGraph/Twitter-карточки, `robots.txt`, `sitemap.xml` и `site.webmanifest` для PWA-иконок.
+
+### Технологии
+
+Чистый фронтенд без зависимостей и сборки:
+
+- **HTML5** — `index.html`, `soon.html`
+- **CSS3** — `css/style.css` (кастомные свойства, анимации, стеклянные/хромовые эффекты)
+- **Vanilla JavaScript** — `js/scrypt.js` (скролл-эффекты, частицы на canvas, лайтбокс, счётчики, темизация)
+- **Google Fonts** (Outfit, Syne, Orbitron, Pirata One, JetBrains Mono и др.) и **Google Analytics (gtag.js)**
+
+### Структура проекта
+
+```
+emoclxn/
+├── assets/                          # Логотип, GIF-фон, скриншоты
+├── css/style.css                    # Стили и анимации
+├── js/scrypt.js                     # Интерактив и эффекты
+├── index.html                       # Главная страница
+├── soon.html                        # Страница-заглушка "скоро"
+├── robots.txt                       # Правила для поисковых роботов
+├── sitemap.xml                      # Карта сайта
+├── site.webmanifest                 # PWA-манифест
+├── CNAME                            # Домен для GitHub Pages
+└── README.md
+```
+
+### Локальный запуск
+
+Инструменты сборки не нужны — сайт полностью статический.
+
+```bash
+git clone https://github.com/aferapokitaysky/emoclxn.git
+cd emoclxn
+```
+
+Затем откройте `index.html` в браузере, либо поднимите локальный сервер (чтобы шрифты и относительные пути работали как в проде):
+
+```bash
+python3 -m http.server 8000
+# затем откройте http://localhost:8000
+```
+
+### Разработка
+
+- **Продакшн**: `PROD BY PTRKXLORD`
+- **Discord**: `aferapokitaisky`
 
 ---
 
-## 👑 РАЗРАБОТКА
-
-* **Developer Credits**: `PROD BY PTRKXLORD`
-* **Discord Contacts**: `aferapokitaisky`
-
----
 <p align="center">
   <i>EMO CLXN // WE CONTROL THE GHETTO // SHOOT TO KILL // SHADOWPLAY IS ALWAYS ON</i>
 </p>
